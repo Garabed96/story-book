@@ -1,0 +1,264 @@
+body{ font-family: 'Roboto', sans-serif; }
+/*COLOR PALETTE FOR PROJECT*/
+/*TITLE SECTION*/
+#title{
+    background-color: #2C3333;
+}
+
+.control-button, .carousel-control-next-icon, .carousel-control-prev-icon{
+}
+
+.carousel-control-next-icon:after
+{
+  content: '>';
+  font-size: 55px;
+  color: #2C3333;
+}
+
+.carousel-control-prev-icon:after {
+  content: '<';
+  font-size: 55px;
+  color: #2C3333;
+}
+
+h1{
+    font-size: 4rem;
+    line-height: 1.5;
+    font-weight: 900;
+}
+
+h2, h3{
+    padding: 1rem;
+}
+
+.title-h1, .title-p{
+    padding-top: 2rem;
+    color: white;
+    padding-bottom: 1rem;
+}
+
+
+
+.navbar-nav{
+    float: right;
+}
+.navbar-brand{
+    padding-left: 5%;
+}
+.container-fluid{ padding: 1% 15% 12% }
+.title-body{
+    padding-top: 5%;
+    text-align: center;
+}
+.navbar{
+    background-color: #2C3333;
+    border-radius: 25px;
+
+}
+
+#body-section{
+    margin: 2rem;
+    padding: 2% 13%;
+    text-align: center;
+}
+
+#footer{
+    background-color: #395B64;
+    padding: 3.5rem;
+    text-align: center;
+}
+
+/*CONTACT PAGE CSS*/
+
+.contact-page{
+    background-image: url("images/letters.jpg");
+}
+
+.about-page{
+    background-image: url("images/engineering.jpg");
+    padding-bottom: 15%;
+    background-size: 2500px 1440px;
+
+}
+@media (max-width: 1028px) {
+   .about-page{
+        background-size: 1024px 1200px;
+   }
+}
+@media (max-width: 600px) {
+   .about-page{
+        background-size: 500px 500px;
+   }
+}
+
+/*BLOG PAGE*/
+.blog-page{
+   background-image: url("images/grassFieldsAsia.jpg");
+    background-size: 2500px 1440px;
+}
+
+.blog{
+    border-radius: 25px;
+    background-color: #395B64;
+    opacity: 95%;
+    padding: 1rem 5rem 10rem 5rem;
+    margin: 2rem 1rem 2rem 1rem;
+}
+#blog-title, .ICode{
+    font-weight: bolder;
+    text-decoration: underline;
+
+}
+
+a{
+    color: #2C3333;
+    text-decoration: inherit; /* no underline */
+}
+a:hover{text-decoration: inherit;}
+a:hover .blog-section{
+    color: wheat;
+    opacity: 100%;
+    background-color: #2C3333;
+    /*background-color: hotpink;*/
+    text-decoration: inherit;
+
+}
+
+.blog-titles{
+    font-weight: bolder;
+    font-size: 2rem;
+    padding: 1rem 1rem 0 1rem;
+
+}
+
+.blog-subtitle, .blog-author{
+    text-align: left;
+    font-size: 1rem;
+    padding: 0 1rem 0 1.5rem;
+}
+strong{
+    color: wheat;
+}
+
+
+hr{
+    background-color: #2C3333;
+}
+
+.scrolling-blog{
+    overflow-y:scroll;
+    height:800px;
+}
+
+
+/*CONTACT PAGE*/
+.contact{
+    background-color: white;
+    padding: 3rem;
+    margin: 3rem;
+}
+
+.contact-item{
+    padding: 1rem;
+}
+
+
+/*ABOUT PAGE CSS*/
+
+.about{
+    background-color: white;
+    padding: 3rem 2rem 0.5rem 2rem;
+    margin: 5rem 1rem 2rem 1rem;
+}
+.pagination-card{
+    margin: 2rem auto 0.5rem auto;
+    text-align: center;
+}
+.pagination{
+    padding-top: 1rem;
+}
+.about-buttons{
+    margin: auto;
+    display: table;
+    padding: 1.5rem 0;
+}
+.project-button, .project-button:hover, .project-button:active, .project-button:visited{
+    background-color: #2C3333;
+    color: white;
+}
+.capstone-button, .capstone-button:hover, .capstone-button:active, .capstone-button:visited{
+    background-color: #395B64;
+    color: white;
+
+}
+.experience-button, .experience-button:hover, .experience-button:active, .experience-button:visited{
+    background-color: #A5C9CA;
+    color: white;
+
+}
+#project-type, #project-type-description, #blog-title{
+    text-align: center;
+}
+/*SWITCH CONTROLS */
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+input:checked + .slider {
+  background-color: black;
+}
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+.slider.round:before {
+  border-radius: 50%;
+}
+/*END OF SWITCH CONTROLS*/
+
+
+
+
+
+
+

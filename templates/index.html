@@ -1,0 +1,25 @@
+{% include 'header.html' %}
+<body>
+{% include 'javascript_imports.html' %}
+<section id="title">
+    <div class="container-fluid">
+    <!-- Nav Bar -->
+    {% include 'navbar.html' %}
+    <!-- Title -->
+      <div class="title-body">
+          <div>
+            <h1 class="title-h1">Ma Website</h1>
+              <p class="title-p">Using Flask and Bootstrap to create ma website</p>
+          </div>
+      </div>
+    </div>
+
+</section>
+<section id="body-section">
+    <h2 class="ICode">I Code Everyday</h2>
+    <h3>Most recent Projects 👨‍💻</h3>
+    {% include 'recent_projects.html' %}
+</section>
+{% include 'footer.html' %}
+</body>
+</html>

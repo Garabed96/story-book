@@ -1,0 +1,56 @@
+
+
+{% include 'header.html' %}
+<body>
+    <script src="./../static/aboutCards.js"></script>
+    <div class="container-fluid about-page">
+        {% include 'navbar.html' %}
+<!--        TODO, It's probably best to take care of storing the data for the -->
+<!--         pagination and context for each project using flask, as of this moment-->
+<!--         we are done with setting up the html styling for the about page-->
+<!--         Ideally we just pass the data, maybe we can use OOP to handle this???-->
+
+
+        <div class="about">
+            <h1 id="project-type">Mini-Project</h1>
+            <p id="project-type-description">Mini-Projects by definition are small, usually these projects take me one to two days.
+                They display my perspicacity in a specific topic. </p>
+            <div class="btn-group about-buttons " role="group" aria-label="Basic example">
+              <button onclick="miniProjects()" type="button" class="btn project-button">Mini-Projects</button>
+              <button onclick="capstoneProjects()" type="button" class="btn capstone-button">Capstone Projects</button>
+              <button onclick="experience()" type="button" class="btn experience-button">Experience</button>
+            </div>
+            <p> </p>
+
+
+
+            {% include 'project_cards.html' %}
+            <nav aria-label="Page navigation pagination-card">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                    </li>
+                </ul>
+            </nav>
+
+
+        </div>
+    </div>
+
+{% include 'footer.html' %}
+
+
+</body>
+</html>
