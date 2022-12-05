@@ -4,24 +4,30 @@
         {% include 'navbar.html' %}
         <div class="blog">
             <h2 id="blog-title">Gerrard's Blog</h2>
+
             <div class="scrolling-blog">
                     {% for blog in blog_posts %}
-                <a href="{{ url_for('blog_post', post=blog.id ) }}">
                     <div class="blog-section">
-                        <h1 class="blog-titles">{{blog.title}}</h1>
-                        <h3 class="blog-subtitle">{{blog.subtitle}}</h3>
-                        <small class="text-muted blog-author">Posted by <strong>Garo Nazarian</strong> on November 9, 2021</small>
+                        <a href="{{ url_for('blog_post', post=blog.id ) }}">
+                            <h1 class="blog-titles">{{blog.title}}</h1>
+                            <h3 class="blog-subtitle">{{blog.subtitle}}</h3>
+                        </a>
+                        <div>
+                            <small class="text-muted blog-author">Posted by <strong>Garo Nazarian</strong> on November 9, 2021</small>
+                            {% if current_user.get_id() == "1" %}
+                                <a href="{{ url_for('delete_post', post_id=blog.id ) }}">❎</a>
+                            {% endif %}
+                        </div>
+
                         <hr>
                     </div>
-                </a>
-
                     {% endfor %}
-
-
+            </div>
+            <div class="text-right m-4">
+                <a class="btn btn-primary btn-lg " href="/new-post" role="button">New Blog Post</a>
             </div>
         </div>
     </div>
 {% include 'footer.html' %}
-
 </body>
 </html>

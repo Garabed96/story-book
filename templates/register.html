@@ -1,0 +1,20 @@
+{% include "header.html" %}
+{% include 'navbar.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+
+{% block content %}
+
+<div class="box">
+	<h1>Register</h1>
+    <form action="{{ url_for('register') }}" method="post">
+    	{{ wtf.quick_form(form, novalidate=True, button_map={'submit': 'primary'}) }}
+    </form>
+          {% if error %}
+    <p class=error><strong>Error:</strong> {{ error }}
+    <a class="btn btn-primary btn-sm" href="{{ url_for('login')}}">Login</a>
+    </p>
+  {% endif %}
+</div>
+
+{% endblock %}

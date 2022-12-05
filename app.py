@@ -1,9 +1,46 @@
-from flask import Flask, render_template
+from flask import Flask, flash, abort, g, jsonify, render_template, request, redirect, url_for
+from flask_bootstrap import Bootstrap
 from posts import Posts
 import json
 import datetime
-app = Flask(__name__)
+import smtplib
+import os
+from datetime import date
+from bleach_security import strip_invalid_html
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
+from flask_gravatar import Gravatar
+from forms import CreatePostForm, LoginForm, UserForm, CommentForm
+from models import User, BlogPost, app, db, Comment
+from flask_ckeditor import CKEditor, CKEditorField
+from functools import wraps
+
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+Bootstrap(app)
+ckeditor = CKEditor(app)
+gravatar = Gravatar(app, size=30, default='retro')
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(user_id)
+
+def admin_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if current_user.id == 1:
+            return f(*args, **kwargs)
+        return abort(403)
+        # return jsonify(error={"No Permission": "Sorry, this user is not an Admin."})
+    return decorated_function
+
+
 YEAR = datetime.datetime.now().year
+my_second_gmail = os.environ.get('SMTP_GMAIL')
+second_gmail_app_password = os.environ.get('GMAIL_PASS')
+my_gmail = os.environ.get('S_GMAIL')
+gmail_app_password = os.environ.get('S_GMAIL_PASS')
 
 posts = json.load(open('static/blog-data.json'))
 post_obj = []
@@ -14,26 +51,172 @@ for post in posts:
 
 @app.route('/')
 def home():  # put application's code here
-    return render_template('index.html', year=YEAR)
+    return render_template('index.html', year=YEAR, name=current_user)
 
 
-@app.route('/contact')
+@app.route('/contact', methods=['GET', 'POST'])
 def contact():
-    return render_template('contact.html', year=YEAR)
+    error = None
+    message = "Contact Me"
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        subject = request.form['subject']
+        email_message = request.form['message']
+        send_email(name, email, subject, email_message)
+        message = 'Successfully sent your message!'
 
+    return render_template('contact.html', year=YEAR, message=message)
+
+
+def send_email(name, email, subject, email_message):
+    sent_message = f'Subject:{subject}\n \n Name: {name} \nEmail: {email} \n Message:{email_message}'.encode('utf-8')
+    with smtplib.SMTP("smtp.gmail.com") as connection:
+        connection.starttls()  # secures the connection by encrypting
+        connection.login(user=my_second_gmail, password=second_gmail_app_password)
+        connection.sendmail(
+            from_addr=my_second_gmail,
+            to_addrs=my_gmail,
+            msg=sent_message
+        )
 
 @app.route('/blog')
 def blog():
-    return render_template('blog.html', year=YEAR, blog_posts=post_obj)
+    blogs = db.session.query(BlogPost).all()
+    return render_template('blog.html', year=YEAR, blog_posts=[blog.to_dict() for blog in blogs], name=current_user)
 
-@app.route('/blog/<int:post>')
+
+@app.route('/blog/<int:post>', methods=['POST', 'GET'])
 def blog_post(post):
-    selected_blog = 0
-    for blog in post_obj:
-        if blog.id == post:
-            selected_blog = blog
-    return render_template('blog_post.html', blog=selected_blog)
+    comments = db.session.query(Comment).all()
+    form = CommentForm()
+    selected_blog = BlogPost.query.get(post)
+    if form.validate_on_submit():
+        if not current_user.is_authenticated:
+            flash("You need to login or register to comment.")
+            return redirect(url_for("login"))
+        new_comment = Comment(
+            comment_text=strip_invalid_html(form.comment.data),
+            author_id=current_user.id,
+            post_id=post
+        )
+        db.session.add(new_comment)
+        db.session.commit()
+        return render_template('blog_post.html', blog=selected_blog, form=form, comments=comments)
+    return render_template('blog_post.html', blog=selected_blog, form=form, comments=comments)
 
+@app.route('/delete/<int:post_id>')
+@login_required
+@admin_required
+def delete_post(post_id):
+    delete_post = BlogPost.query.get(post_id)
+    db.session.delete(delete_post)
+    db.session.commit()
+    return redirect(url_for('blog'))
+
+# WTForms don't accept PUT, PATCH or Delete, so we POST
+@app.route('/edit-post/<int:post_id>', methods=['POST', 'GET'])
+@login_required
+@admin_required
+def edit_post(post_id):
+    post = BlogPost.query.get(post_id)
+    print(post.title)
+    edit_form = CreatePostForm(
+        title=post.title,
+        subtitle=post.subtitle,
+        body=post.body,
+        author=post.author,
+        img_url=post.img_url
+    )
+    if edit_form.validate_on_submit():
+        if post:
+            post.title = strip_invalid_html(edit_form.title.data)
+            post.subtitle = strip_invalid_html(edit_form.subtitle.data)
+            post.img_url = strip_invalid_html(edit_form.img_url.data)
+            post.body = strip_invalid_html(edit_form.body.data)
+            # print("NEW DATA: ", strip_invalid_html(edit_form.body.data))
+            db.session.commit()
+            return redirect(url_for("blog", post_id=post.id))
+
+    return render_template('edit-post.html', form=edit_form)
+
+
+@login_required
+@app.route('/new-post', methods=['POST', 'GET'])
+@admin_required
+def create_post():
+    form = CreatePostForm()
+    if form.validate_on_submit():
+        print("create new blog post")
+        new_post = BlogPost(
+            title=strip_invalid_html(request.form.get("title")),
+            subtitle=strip_invalid_html(request.form.get("subtitle")),
+            author_id=current_user.id,
+            img_url=strip_invalid_html(request.form.get("img_url")),
+            body=strip_invalid_html(request.form.get("body")),
+            date=date.today().strftime("%B %d, %Y"),
+        )
+        try:
+            db.session.add(new_post)
+            db.session.commit()
+        except Exception as error:
+            print("Doesn't exist")
+        return redirect(url_for("blog"))
+    return render_template('make-post.html', form=form)
+
+
+@login_required
+@app.route('/register', methods=["POST", "GET"])
+def register():
+    form = UserForm()
+    error = None
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user:
+            error='That email already exists.'
+            return render_template('register.html', form=form, error=error)
+        else:
+            new_user = User(
+                email=form.email.data,
+                name=form.name.data,
+            password=generate_password_hash
+                (
+                    password=form.password.data,
+                    method='pbkdf2:sha256',
+                    salt_length=8
+                )
+            )
+        db.session.add(new_user)
+        db.session.commit()
+        login_user(new_user)
+        return redirect(url_for('home'))
+
+    return render_template('register.html', form=form)
+
+
+@login_required
+@app.route('/login', methods=["POST", "GET"])
+def login():
+    error = None
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        print(user)
+        if user and check_password_hash(user.password, form.password.data):
+            login_user(user)
+            return redirect(url_for('home'))
+        elif user == error:
+            error = 'That email does not exist, please try again'
+        elif user and not check_password_hash(user.password, form.password.data):
+            error = 'Password incorrect, please try again.'
+            # return redirect(url_for('login'))
+    return render_template("login.html", form=form, error=error)
+
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return render_template('index.html', year=YEAR, logged_in=False)
 
 @app.route('/about')
 def about():
@@ -41,4 +224,4 @@ def about():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=1555)
+    app.run(debug=True, host='0.0.0.0', port=1122)

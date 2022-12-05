@@ -1,0 +1,25 @@
+{% include "header.html" %}
+{% include 'navbar.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+
+<div class="box">
+    <h1>Login</h1>
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {% for message in messages %}
+           <p>{{ message }}</p>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+    <form action="{{ url_for('login') }}" method="post">
+    	{{ wtf.quick_form(form, novalidate=True, button_map={'submit': 'primary'}) }}
+    </form>
+        {% if error %}
+    <p class=error><strong>Error:</strong> {{ error }}</p>
+  {% endif %}
+</div>
+
+{% endblock %}

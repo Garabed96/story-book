@@ -3,28 +3,28 @@
     <div class="container-fluid contact-page">
 
         {% include 'navbar.html' %}
-
-        <div class="contact">
-            <h2>Contact Me</h2>
+        <form class="contact" action="{{url_for('contact')}}" method="post">
+            <h2 class="contact_title">{{message}}</h2>
+            <h4 class="contact_catch">Have Questions? I have the answers!</h4>
             <div class="row">
               <div class="col-md-6 contact-item">
-                <input type="text" class="form-control" placeholder="Name" aria-label="First name">
+                <input type="text" class="form-control" name="name" placeholder="Name" aria-label="name">
               </div>
               <div class="col-md-6 contact-item">
-                <input type="email" class="form-control" placeholder="Email" aria-label="Last name">
+                <input type="email" class="form-control" name="email" placeholder="Email" aria-label="email">
               </div>
             </div>
             <div class="row contact-item">
-                <input type="text" class="form-control" placeholder="Subject" aria-label="First name">
+                <input type="text" class="form-control" name="subject" placeholder="Subject" aria-label="subject">
 
             </div>
             <div class="row contact-item">
-                <textarea class="form-control" rows="6" placeholder="Message" aria-label="First name"></textarea>
+                <textarea class="form-control" rows="6" name="message" placeholder="Message" aria-label="message"></textarea>
 
             </div>
-            <button type="button" class="btn btn-dark btn-lg">Send Message</button>
+            <button type="submit" class="btn btn-dark btn-lg">Send Message</button>
 
-        </div>
+        </form>
 
     </div>
 {% include 'footer.html' %}
