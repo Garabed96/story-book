@@ -3,7 +3,11 @@ from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, render_template, request, redirect, url_for
 from flask_bootstrap import Bootstrap
 from sqlalchemy.orm import relationship
+from sqlalchemy_utils import  ChoiceType
 
+
+## CHOICES IMPORT
+## https://sqlalchemy-utils.readthedocs.io/en/latest/data_types.html#module-sqlalchemy_utils.types.choice
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '8BYkEfbA606donzWlsih'
@@ -32,6 +36,25 @@ class User(UserMixin, db.Model):
     # act like a list of Comment objects attached to each User.
     comments = relationship("Comment", back_populates="comment_author")
 
+
+## Create Project Class
+class ProjectPost(db.Model):
+
+    TYPES  = [
+        ('mini', 'Mini'),
+        ('capstone', 'Capstone'),
+        ('experience', 'Experience')
+    ]
+
+    __tablename__ = "projects"
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(250), unique=True, nullable=False)
+    subtitle = db.Column(db.String(250), unique=True, nullable=False)
+    date = db.Column(db.String(250),  nullable=False)
+    updated_date = db.Column(db.String(250),  nullable=False)
+    body = db.Column(db.Text,  nullable=False)
+    url = db.Column(db.String(150), nullable=False)
+    type = db.Column(ChoiceType(TYPES), nullable=False)
 
 ##CONFIGURE Blog Table
 class BlogPost(db.Model):

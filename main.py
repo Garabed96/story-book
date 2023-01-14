@@ -1,6 +1,7 @@
 from flask import Flask, flash, abort, g, jsonify, render_template, request, redirect, url_for
 from flask_bootstrap import Bootstrap
 from posts import Posts
+from projects import Projects
 import json
 import datetime
 import smtplib
@@ -11,14 +12,24 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 from flask_gravatar import Gravatar
 from forms import CreatePostForm, LoginForm, UserForm, CommentForm
-from models import User, BlogPost, app, db, Comment
+from models import User, BlogPost, app, db, Comment, ProjectPost
 from flask_ckeditor import CKEditor, CKEditorField
 from functools import wraps
+from flask_admin import Admin
+from flask_admin.contrib.sqla import ModelView
+
 
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 Bootstrap(app)
 ckeditor = CKEditor(app)
 gravatar = Gravatar(app, size=30, default='retro')
+
+
+admin = Admin(app, name='microblog', template_mode='bootstrap3')
+admin.add_view(ModelView(User, db.session))
+admin.add_view(ModelView(BlogPost, db.session))
+admin.add_view(ModelView(Comment, db.session))
+admin.add_view(ModelView(ProjectPost, db.session))
 
 login_manager = LoginManager()
 login_manager.init_app(app)
