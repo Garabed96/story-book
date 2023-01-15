@@ -51,7 +51,7 @@ class ProjectPost(db.Model):
     title = db.Column(db.String(250), unique=True, nullable=False)
     subtitle = db.Column(db.String(250), unique=True, nullable=False)
     date = db.Column(db.String(250),  nullable=False)
-    updated_date = db.Column(db.String(250),  nullable=False)
+    updated_date = db.Column(db.String(250),  nullable=True)
     body = db.Column(db.Text,  nullable=False)
     url = db.Column(db.String(150), nullable=False)
     type = db.Column(ChoiceType(TYPES), nullable=False)
@@ -99,5 +99,5 @@ class Comment(db.Model):
 
 
 ## CREATE DATABASE
-# with app.app_context():
-#     db.create_all()
+with app.app_context():
+    db.create_all()

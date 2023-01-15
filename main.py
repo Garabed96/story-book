@@ -116,6 +116,8 @@ def blog_post(post):
         return render_template('blog_post.html', blog=selected_blog, form=form, comments=comments)
     return render_template('blog_post.html', blog=selected_blog, form=form, comments=comments)
 
+
+
 @app.route('/delete/<int:post_id>')
 @login_required
 @admin_required
@@ -229,9 +231,12 @@ def logout():
     logout_user()
     return render_template('index.html', year=YEAR, logged_in=False)
 
-@app.route('/about')
-def about():
-    return render_template('about.html', year=YEAR)
+@app.route('/about/<int:page>')
+def about(page):
+    per_page = 3
+    projects = db.session.query(ProjectPost).all()
+    projects_page = ProjectPost.query.paginate(page=page, per_page=per_page, error_out=False)
+    return render_template('about.html', year=YEAR, project_posts=projects_page)
 
 
 if __name__ == '__main__':
