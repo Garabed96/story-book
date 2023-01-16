@@ -59,10 +59,16 @@ for post in posts:
     obj = Posts(post["id"], post["title"], post["subtitle"], post["body"])
     post_obj.append(obj)
 
+'''
+Project pages display 
+'''
+def project(page):
+    per_page = 3
+    return ProjectPost.query.paginate(page=page, per_page=per_page, error_out=False)
 
 @app.route('/')
-def home():  # put application's code here
-    return render_template('index.html', year=YEAR, name=current_user)
+def home(page=1):  # put application's code here
+    return render_template('index.html', year=YEAR, name=current_user, project_posts=project(page))
 
 
 @app.route('/contact', methods=['GET', 'POST'])
@@ -232,11 +238,8 @@ def logout():
     return render_template('index.html', year=YEAR, logged_in=False)
 
 @app.route('/about/<int:page>')
-def about(page):
-    per_page = 3
-    projects = db.session.query(ProjectPost).all()
-    projects_page = ProjectPost.query.paginate(page=page, per_page=per_page, error_out=False)
-    return render_template('about.html', year=YEAR, project_posts=projects_page)
+def about(page=1):
+    return render_template('about.html', year=YEAR, project_posts=project(page))
 
 
 if __name__ == '__main__':

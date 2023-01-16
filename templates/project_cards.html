@@ -1,7 +1,7 @@
 <div class="card-group">
     {% for posts in project_posts %}
         <div class="card">
-    <img src="..." class="card-img-top" alt="...">
+    <img src="./../static/images/projectImages/{{posts.title}}.{{'png'}}" class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">{{posts.title}}</h5>
       <p class="card-text">{{posts.subtitle}}</p>
