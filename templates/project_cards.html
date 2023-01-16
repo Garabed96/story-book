@@ -1,18 +1,55 @@
-<div class="card-group">
-    {% set image_types = ['png', 'jpeg'] %}
-    {% for posts in project_posts %}
-        <div class="card">
-    {% for type in image_types %}
-            <img src="./../static/images/projectImages/{{posts.title}}.{{type}}" onerror="this.style.display='none'" class="card-img-top" alt="...">
-    {% endfor %}
+<link rel="stylesheet" href="{{ url_for('static', filename='card_flip.css') }}"/>
 
-            <div class="card-body">
-      <h5 class="card-title">{{posts.title}}</h5>
-      <p class="card-text">{{posts.subtitle}}</p>
-    </div>
-    <div class="card-footer">
-      <small class="text-muted">{{posts.date}}</small>
-    </div>
-  </div>
-    {% endfor %}
+{% set image_types = ['png', 'jpeg'] %}
+
+<!--
+TODO: Add Github links AND Start Creating Demo Pages for each project
+-->
+    <div class="container ">
+    <div class="row">
+       {% for posts in project_posts %}
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card card-flip h-100">
+                <div class="card-front text-white bg-dark">
+                    <div class="card-body">
+                        <div class="card-title">
+                              {% for type in image_types %}
+                                <img src="./../static/images/projectImages/{{posts.title}}.{{type}}"  onerror="this.style.display='none'" class="card-img-top" alt="...">
+                              {% endfor %}
+                        </div>
+                        <h3 class="card-text">{{posts.title}}</h3>
+                        <p class="card-text">{{posts.subtitle}}</p>
+                            <div class="card-footer">
+                                <small class="text-muted">{{posts.date}}</small>
+                            </div>
+                    </div>
+            </div>
+            <div class="card-back bg-white">
+                <div class="card-body">
+                    <p class="card-title back">Demonstration how the project works with pictures and/or videos.</p>
+                    <a href="#" class="btn btn-outline-secondary ">Demo</a>
+                    <h2 class="card-text back">Github</h2>
+                    <a href="#" class="btn btn-outline-secondary">Github</a>
+                </div>
+            </div>
+        </div>
+</div>
+{% endfor %}
+
+<!--      CARDS KINDA WORKIN DOWN HERE-->
+<!--    {% for posts in project_posts %}-->
+<!--        <div class="card ">-->
+<!--    {% for type in image_types %}-->
+<!--            <img src="./../static/images/projectImages/{{posts.title}}.{{type}}" onerror="this.style.display='none'" class="card-img-top" alt="...">-->
+<!--    {% endfor %}-->
+
+<!--    <div class="card-body">-->
+<!--      <h5 class="card-title">{{posts.title}}</h5>-->
+<!--      <p class="card-text">{{posts.subtitle}}</p>-->
+<!--    </div>-->
+<!--    <div class="card-footer">-->
+<!--      <small class="text-muted">{{posts.date}}</small>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--    {% endfor %}-->
 </div>
