@@ -1,8 +1,12 @@
 <div class="card-group">
+    {% set image_types = ['png', 'jpeg'] %}
     {% for posts in project_posts %}
         <div class="card">
-    <img src="./../static/images/projectImages/{{posts.title}}.{{'png'}}" class="card-img-top" alt="...">
-    <div class="card-body">
+    {% for type in image_types %}
+            <img src="./../static/images/projectImages/{{posts.title}}.{{type}}" onerror="this.style.display='none'" class="card-img-top" alt="...">
+    {% endfor %}
+
+            <div class="card-body">
       <h5 class="card-title">{{posts.title}}</h5>
       <p class="card-text">{{posts.subtitle}}</p>
     </div>

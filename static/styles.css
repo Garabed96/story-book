@@ -209,9 +209,9 @@ hr{
 /*ABOUT PAGE CSS*/
 
 .about{
-    background-color: white;
-    padding: 3rem 2rem 0.5rem 2rem;
-    margin: 5rem 1rem 2rem 1rem;
+    background-color: whitesmoke;
+    padding: 1rem 2rem 1rem 2rem;
+    margin: 0.5rem 1rem 2rem 1rem;
 }
 .pagination-card{
     margin: 2rem auto 0.5rem auto;
@@ -245,6 +245,38 @@ hr{
     font-weight: 900;
     color: Black;
 }
+
+
+
+.pagination > li > a
+{
+    background-color: white;
+    color: black;
+}
+
+.pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > li > span:focus,
+.pagination > li > span:hover
+{
+    color: whitesmoke;
+    background-color: black;
+    border-color: #ddd;
+}
+
+.pagination > .active > a
+{
+    color: white;
+    background-color: #5A4181 !Important;
+    border: solid 1px #5A4181 !Important;
+}
+
+.pagination > .active > a:hover
+{
+    background-color: #5A4181 !Important;
+    border: solid 1px #5A4181;
+}
+
 /*SWITCH CONTROLS */
 /* The switch - the box around the slider */
 .switch {
