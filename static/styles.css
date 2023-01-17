@@ -76,11 +76,17 @@ h2, h3{
 .navbar-brand{
     padding-left: 5%;
 }
-.container-fluid{ padding: 1% 15% 12% }
+.container-fluid{ padding: 1% 0.5rem 0 }
+@media (min-width: 1028px) {
+    .container-fluid{ padding: 1% 15% 12% }
+
+}
 .title-body{
     padding-top: 5%;
     text-align: center;
 }
+
+
 .navbar{
     background-color: #2C3333;
     border-radius: 25px;
@@ -334,7 +340,16 @@ input:checked + .slider:before {
 }
 /*END OF SWITCH CONTROLS*/
 
+.calendar{
+    padding-bottom: 4rem;
+    background-color: #3c6255;
+}
 
+.calendar > h1{
+    padding-top: 1rem;
+    color: whitesmoke;
+    text-align: center;
+}
 
 
 

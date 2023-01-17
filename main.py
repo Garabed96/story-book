@@ -241,7 +241,9 @@ def logout():
     logout_user()
     return render_template('index.html', year=YEAR, logged_in=False)
 
-@app.route('/about/<int:page>')
+
+# Take Mini, Capstone, Experience as inputs
+@app.route('/about/<int:page>', methods=["POST", "GET"])
 def about(page=1):
     return render_template('about.html', year=YEAR, project_posts=project(page))
 
@@ -250,3 +252,5 @@ def about(page=1):
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=1122)
+
+
