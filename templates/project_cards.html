@@ -4,25 +4,26 @@
 
 <!--
 TODO: Add Github links AND Start Creating Demo Pages for each project
+TODO: FIX ROUTING: when your on about page and click about it fucks up
 -->
     <div class="container ">
     <div class="row">
        {% for posts in project_posts %}
         <div class="col-12 col-md-6 col-lg-4">
             <div class="card card-flip h-100">
-                <div class="card-front text-white bg-dark">
-                    <div class="card-body">
-                        <div class="card-title">
-                              {% for type in image_types %}
-                                <img src="./../static/images/projectImages/{{posts.title}}.{{type}}"  onerror="this.style.display='none'" class="card-img-top" alt="...">
+                <div class="card card-front text-white ">
+                    <div class="card-header">
+                             {% for type in image_types %}
+                                <img src="./../static/images/projectImages/{{posts.title}}.{{type}}" onerror="this.style.display='none'" class="card-img-top" alt="...">
                               {% endfor %}
-                        </div>
+                    </div>
+                    <div class="card-body">
                         <h3 class="card-text">{{posts.title}}</h3>
                         <p class="card-text">{{posts.subtitle}}</p>
-                            <div class="card-footer">
-                                <small class="text-muted">{{posts.date}}</small>
-                            </div>
                     </div>
+                      <div class="card-footer">
+                                <footer class="text-muted">Last Updated: {{posts.date}}</footer>
+                      </div>
             </div>
             <div class="card-back bg-white">
                 <div class="card-body">
@@ -33,23 +34,6 @@ TODO: Add Github links AND Start Creating Demo Pages for each project
                 </div>
             </div>
         </div>
-</div>
-{% endfor %}
-
-<!--      CARDS KINDA WORKIN DOWN HERE-->
-<!--    {% for posts in project_posts %}-->
-<!--        <div class="card ">-->
-<!--    {% for type in image_types %}-->
-<!--            <img src="./../static/images/projectImages/{{posts.title}}.{{type}}" onerror="this.style.display='none'" class="card-img-top" alt="...">-->
-<!--    {% endfor %}-->
-
-<!--    <div class="card-body">-->
-<!--      <h5 class="card-title">{{posts.title}}</h5>-->
-<!--      <p class="card-text">{{posts.subtitle}}</p>-->
-<!--    </div>-->
-<!--    <div class="card-footer">-->
-<!--      <small class="text-muted">{{posts.date}}</small>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--    {% endfor %}-->
+    </div>
+        {% endfor %}
 </div>
