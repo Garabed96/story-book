@@ -1,18 +1,56 @@
 {% include 'header.html' %}
 {% import "bootstrap/wtf.html" as wtf %}
+<link rel="stylesheet" href="{{ url_for('static', filename='project_styles.css') }}"/>
+
 {% block content %}
 
 
+{% set image_types = ['png', 'jpeg'] %}
 
 
 <body>
     <div class="container-fluid project-post-page">
     {% include 'navbar.html' %}
-                <div class="project-post">
-                    <h2 id="project-title">{{project.title}}</h2>
-                    <h3 class="project-subtitle">{{project.subtitle}}</h3>
-                </div>
+                         <a  href="{{ url_for('about', page=projects.page) }}" class="btn btn-outline-secondary ">Back to Projects</a>
+                 {% for type in image_types %}
+                        <img src="./../static/images/projectImages/{{project.title}}.{{type}}" onerror="this.style.display='none'" class="card-img-top" alt="...">
+                  {% endfor %}
 
+                <div class="project-post">
+                    <h1 id="project-title">{{project.title}}</h1> <hr/>
+                    <h3 class="project-subtitle">{{project.subtitle}}</h3>
+                    <span>Table of Contents</span>.
+                    <ul>
+                            <li>Objective</li>
+                            <li>About</li>
+                            <li>Features</li>
+                            <li>Resources</li>
+                        </ul>
+                    <h2>Objective:</h2> <hr/>
+                        <ul>
+                            <li>stuff here</li>
+                            <li>stuff here</li>
+                            <li>more stuff here....</li>
+                        </ul>
+                    <div>
+                        <video  width="640" height="360" src="{{ video_url }}"
+                                data-canonical-src="{{ video_url }}"
+                                controls="controls" muted="muted" class="d-block rounded-bottom-2 border-top width-fit">
+                              Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div>
+                        <h2>About:</h2> <hr/>
+                    </div>
+                    <div>
+                        <h2>Features:</h2> <hr/>
+                    </div>
+                    <div>
+                        <h2>Features:</h2> <hr/>
+                    </div>
+
+                </div>
+                <a  href="{{ url_for('about', page=projects.page) }}" class="btn btn-outline-primary ">Back to Projects</a>
     </div>
 
 

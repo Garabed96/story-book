@@ -123,10 +123,10 @@ def blog_post(post):
     return render_template('blog_post.html', blog=selected_blog, form=form, comments=comments)
 
 #  Projects, will show a demo of a project on each tab.... brrrr its connected by ID!
-@app.route('/project/<int:project_id>')
-def project_posts(project_id):
+@app.route('/mini-projects/<int:project_id>')
+def project_posts(project_id, page=1):
     selected_project = ProjectPost.query.get(project_id)
-    return render_template('project_post.html', project=selected_project)
+    return render_template('project_post.html', project=selected_project, year=YEAR, projects=project(page))
 
 @app.route('/delete/<int:post_id>')
 @login_required
