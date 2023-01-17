@@ -5,12 +5,6 @@
     <script src="./../static/aboutCards.js"></script>
     <div class="container-fluid about-page">
         {% include 'navbar.html' %}
-<!--        TODO, It's probably best to take care of storing the data for the -->
-<!--         pagination and context for each project using flask, as of this moment-->
-<!--         we are done with setting up the html styling for the about page-->
-<!--         Ideally we just pass the data, maybe we can use OOP to handle this???-->
-
-
         <div class="about">
             <h2 id="project-type">Mini-Project</h2>
             <p id="project-type-description">Mini-Projects by definition are small, usually these projects take me 4 hours to a full day.
@@ -56,14 +50,7 @@
                     {% endif %}
                 </ul>
             </nav>
-
-            <p> </p>
-
-
-
             {% include 'project_cards.html' %}
-
-
         </div>
     </div>
 

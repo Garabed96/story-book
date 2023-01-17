@@ -1,0 +1,23 @@
+{% include 'header.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block content %}
+
+
+
+
+<body>
+    <div class="container-fluid project-post-page">
+    {% include 'navbar.html' %}
+                <div class="project-post">
+                    <h2 id="project-title">{{project.title}}</h2>
+                    <h3 class="project-subtitle">{{project.subtitle}}</h3>
+                </div>
+
+    </div>
+
+
+
+{% include 'footer.html' %}
+</body>
+</html>
+{% endblock %}

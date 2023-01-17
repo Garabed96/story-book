@@ -28,7 +28,7 @@ TODO: FIX ROUTING: when your on about page and click about it fucks up
             <div class="card-back bg-white">
                 <div class="card-body">
                     <p class="card-title back">Demonstration how the project works with pictures and/or videos.</p>
-                    <a href="#" class="btn btn-outline-secondary ">Demo</a>
+                    <a  href="{{ url_for('project_posts', project_id=posts.id ) }}" class="btn btn-outline-secondary ">Demo</a>
                     <h2 class="card-text back">Github</h2>
                     <a href="#" class="btn btn-outline-secondary">Github</a>
                 </div>

@@ -122,7 +122,11 @@ def blog_post(post):
         return render_template('blog_post.html', blog=selected_blog, form=form, comments=comments)
     return render_template('blog_post.html', blog=selected_blog, form=form, comments=comments)
 
-
+#  Projects, will show a demo of a project on each tab.... brrrr its connected by ID!
+@app.route('/project/<int:project_id>')
+def project_posts(project_id):
+    selected_project = ProjectPost.query.get(project_id)
+    return render_template('project_post.html', project=selected_project)
 
 @app.route('/delete/<int:post_id>')
 @login_required
@@ -240,6 +244,8 @@ def logout():
 @app.route('/about/<int:page>')
 def about(page=1):
     return render_template('about.html', year=YEAR, project_posts=project(page))
+
+
 
 
 if __name__ == '__main__':
