@@ -86,6 +86,28 @@ def contact():
     return render_template('contact.html', year=YEAR, message=message)
 
 
+# Take Mini, Capstone, Experience as inputs
+@app.route('/about/<int:page>', methods=["POST", "GET"])
+def about(page):
+    default_project_type = "Mini"
+    project_descriptions = {
+        'mini': "Mini-Projects by definition are small, usually these projects take me one to two days.\n " \
+                                  "They display my perspicacity in a specific topic.",
+        'capstone': 'The Capstone projects are a display of my ability to combine technologies',
+        'experience': "Work Experience I've accumulated over the past 4 years as a professional software engineer"
+    }
+    proj_type = default_project_type
+    projects = ProjectPost.query.filter_by(type='mini').all()
+    print("**********INIT: ", projects)
+    if request.method == 'POST':
+        proj_type = request.form['projectType']
+
+    return render_template('about.html', year=YEAR,
+                           project_posts=project(page),
+                           project_type=proj_type.upper(),
+                           project_description=project_descriptions[proj_type])
+
+
 def send_email(name, email, subject, email_message):
     sent_message = f'Subject:{subject}\n \n Name: {name} \nEmail: {email} \n Message:{email_message}'.encode('utf-8')
     with smtplib.SMTP("smtp.gmail.com") as connection:
@@ -242,10 +264,6 @@ def logout():
     return render_template('index.html', year=YEAR, logged_in=False)
 
 
-# Take Mini, Capstone, Experience as inputs
-@app.route('/about/<int:page>', methods=["POST", "GET"])
-def about(page=1):
-    return render_template('about.html', year=YEAR, project_posts=project(page))
 
 
 
