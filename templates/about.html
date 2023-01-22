@@ -27,7 +27,7 @@
                         </li>
                         {% endif %}
                     <li class="page-item"><a class="page-link" href="{{project_posts.prev_num}}">{{project_posts.page-1}}</a></li>
-                    <li class="page-item"><a class="page-link" href="{{project_posts.page}}">{{project_posts.page}}</a></li>
+                    <li class="page-item active"><a class="page-link" href="{{project_posts.page}}">{{project_posts.page}}</a></li>
                         {% if project_posts.page < project_posts.pages - 1%}
                             <li class="page-item"><a class="page-link" href="{{project_posts.next_num}}">{{project_posts.page + 1}}</a></li>
                         {% endif %}

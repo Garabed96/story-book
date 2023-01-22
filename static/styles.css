@@ -273,7 +273,7 @@ hr{
 .pagination > .active > a
 {
     color: white;
-    background-color: #5A4181 !Important;
+    background-color: orange !Important;
     border: solid 1px #5A4181 !Important;
 }
 
