@@ -59,16 +59,17 @@ for post in posts:
     obj = Posts(post["id"], post["title"], post["subtitle"], post["body"])
     post_obj.append(obj)
 
+
 '''
 Project pages display 
 '''
-def project(page):
+def project(page, proj_type='mini'):
     per_page = 3
-    return ProjectPost.query.paginate(page=page, per_page=per_page, error_out=False)
+    return ProjectPost.query.filter(ProjectPost.type == proj_type).paginate(page=page, per_page=per_page, error_out=False)
 
 @app.route('/')
 def home(page=1):  # put application's code here
-    return render_template('index.html', year=YEAR, name=current_user, project_posts=project(page))
+    return render_template('index.html', year=YEAR, name=current_user, project_posts=project(page, proj_type='mini'))
 
 
 @app.route('/contact', methods=['GET', 'POST'])
@@ -89,21 +90,28 @@ def contact():
 # Take Mini, Capstone, Experience as inputs
 @app.route('/about/<int:page>', methods=["POST", "GET"])
 def about(page):
-    default_project_type = "Mini"
     project_descriptions = {
         'mini': "Mini-Projects by definition are small, usually these projects take me one to two days.\n " \
                                   "They display my perspicacity in a specific topic.",
         'capstone': 'The Capstone projects are a display of my ability to combine technologies',
         'experience': "Work Experience I've accumulated over the past 4 years as a professional software engineer"
     }
-    proj_type = default_project_type
-    projects = ProjectPost.query.filter_by(type='mini').all()
-    print("**********INIT: ", projects)
+    proj_type = 'mini'
     if request.method == 'POST':
         proj_type = request.form['projectType']
+        print(proj_type)
+        combined_objects = {}
+        projects = ProjectPost.query.filter_by(type=proj_type).all()
+        for obj in projects:
+            combined_objects.update(obj.__dict__)
+        print(obj.title)
+        return render_template('about.html', year=YEAR,
+                               project_posts=project(page=1, proj_type=proj_type),
+                               project_type=proj_type.upper(),
+                               project_description=project_descriptions[proj_type])
 
     return render_template('about.html', year=YEAR,
-                           project_posts=project(page),
+                           project_posts=project(page, proj_type=proj_type),
                            project_type=proj_type.upper(),
                            project_description=project_descriptions[proj_type])
 
@@ -146,9 +154,9 @@ def blog_post(post):
 
 #  Projects, will show a demo of a project on each tab.... brrrr its connected by ID!
 @app.route('/mini-projects/<int:project_id>')
-def project_posts(project_id, page=1):
+def project_page(project_id, page=1):
     selected_project = ProjectPost.query.get(project_id)
-    return render_template('project_post.html', project=selected_project, year=YEAR, projects=project(page))
+    return render_template('project_post.html', project=selected_project, year=YEAR, projects=project(page, proj_type='capstone'))
 
 @app.route('/delete/<int:post_id>')
 @login_required
