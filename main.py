@@ -84,7 +84,9 @@ def contact():
         send_email(name, email, subject, email_message)
         message = 'Successfully sent your message!'
 
-    return render_template('contact.html', year=YEAR, message=message)
+    return render_template('contact.html',
+                           year=YEAR, message=message,
+                           project_posts=project(page=1, proj_type='mini'))
 
 
 # Take Mini, Capstone, Experience as inputs
@@ -130,7 +132,8 @@ def send_email(name, email, subject, email_message):
 @app.route('/blog')
 def blog():
     blogs = db.session.query(BlogPost).all()
-    return render_template('blog.html', year=YEAR, blog_posts=[blog.to_dict() for blog in blogs], name=current_user)
+    return render_template('blog.html', year=YEAR, blog_posts=[blog.to_dict() for blog in blogs],
+                           name=current_user, project_posts=project(page=1, proj_type='mini'))
 
 
 @app.route('/blog/<int:post>', methods=['POST', 'GET'])
@@ -150,7 +153,8 @@ def blog_post(post):
         db.session.add(new_comment)
         db.session.commit()
         return render_template('blog_post.html', blog=selected_blog, form=form, comments=comments)
-    return render_template('blog_post.html', blog=selected_blog, form=form, comments=comments)
+    return render_template('blog_post.html', blog=selected_blog, form=form, comments=comments,
+                           project_posts=project(page=1, proj_type='mini'))
 
 #  Projects, will show a demo of a project on each tab.... brrrr its connected by ID!
 @app.route('/projects/<int:project_id>')
@@ -244,7 +248,7 @@ def register():
         login_user(new_user)
         return redirect(url_for('home'))
 
-    return render_template('register.html', form=form)
+    return render_template('register.html', form=form, project_posts=project(page=1, proj_type='mini'))
 
 
 @login_required
@@ -263,7 +267,7 @@ def login():
         elif user and not check_password_hash(user.password, form.password.data):
             error = 'Password incorrect, please try again.'
             # return redirect(url_for('login'))
-    return render_template("login.html", form=form, error=error)
+    return render_template("login.html", form=form, error=error, project_posts=project(page=1, proj_type='mini'))
 
 
 @app.route('/logout')
