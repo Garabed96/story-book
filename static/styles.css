@@ -76,35 +76,87 @@ h2, h3{
 .navbar-brand{
     padding-left: 5%;
 }
-.container-fluid{ padding: 1% 0.5rem 0 }
+.container-fluid{
+    padding: 1% 0.5rem 0
+}
+
+
 @media (min-width: 1028px) {
     .container-fluid{ padding: 1% 15% 12% }
 
 }
 .title-body{
-    padding-top: 5%;
+    height: 70vh;
+
+}
+
+.sliding-cta{
+    color: whitesmoke;
+    font-family: 'Merienda', cursive;
+    font-size: 0.5rem;
     text-align: center;
+    padding-bottom: 1rem ;
+}
+ .name{
+    text-align: center;
+    color: whitesmoke;
+    font-family: 'Merienda', cursive;
+    font-weight: 300;
+    font-size: 20px;
+ }
+ .last-name{
+    font-size: 4.5rem;
+}
+.namesubtitle{
+    font-weight: 300;
+    font-size: 13px;
 }
 
 
 .navbar{
     background-color: #2C3333;
     border-radius: 25px;
+    margin-top: 3rem;
 
 }
 
 #body-section{
-    margin: 2rem;
     padding: 2% 13%;
     text-align: center;
 }
 
 #footer{
-    background-color: #395B64;
+    color: whitesmoke;
+    background-color: #2C3333;
     padding: 3.5rem;
     text-align: center;
+    font-family: 'Merienda', cursive;
+
+}
+.year{
+    font-size: 0.6rem;
+}
+.fa-circle{
+    color: #C7A68B;
+    font-size: 0.5rem;
+    padding-left: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+}
+.footer-link{
+    color: #C7A68B;
+    text-align: center;
+}
+.linkedin{
+    padding-top:1rem;
 }
 
+.row{
+}
+
+.row-anchors{
+    padding-left: 0.4rem;
+}
 /*CONTACT PAGE CSS*/
 
 .contact-page{
@@ -342,7 +394,7 @@ input:checked + .slider:before {
 
 .calendar{
     padding-bottom: 4rem;
-    background-color: #3c6255;
+    background-color: #2E86C1;
 }
 
 .calendar > h1{

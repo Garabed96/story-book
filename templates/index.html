@@ -1,17 +1,21 @@
 {% include 'header.html' %}
 <body>
 {% include 'javascript_imports.html' %}
+<link rel="stylesheet" href="{{ url_for('static', filename='nighttime.css') }}"/>
+<script src="{{ url_for('static', filename='nightmode.js') }}"></script>
+
 <section id="titleStyle">
     <div class="container-fluid">
     <!-- Nav Bar -->
     {% include 'navbar.html' %}
     <!-- Title -->
       <div class="title-body">
-          <div>
-            <h1 class="title-h1">Ma Website</h1>
-              <p class="title-p">Using Flask and Bootstrap to create ma website</p>
+          <div class="name">
+              <div class="first-name">GARO</div>
+              <div class="last-name">NAZARIAN</div>
           </div>
       </div>
+        <div class="sliding-cta">EXPERIENCED SOFTWARE AND DESIGN ENGINEER. EXPLORE MY RECENT WORK. </div>
     </div>
 <!--TODO: Clean up the Next Previous buttons and optimize for mobile!-->
 </section>

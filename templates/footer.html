@@ -1,4 +1,29 @@
 <section id="footer">
-    <p>© Copyright {{ year }} Garo Nazarian</p>
+
+    <div class="footer-links d-flex justify-content-center">
+        <div class="row no-gutters mx-auto">
+            <i class="fa-solid fa-circle"></i>
+
+              <a class="footer-link row-anchors" href={{url_for('home')}}>Home</a>
+            <i class="fa-solid fa-circle"></i>
+
+              <a class="footer-link row-anchors" href="{{ url_for('about', page=project_posts.page) }}">About</a>
+                       <i class="fa-solid fa-circle"></i>
+
+              <a class="footer-link row-anchors" href="{{ url_for('blog') }}">Blog</a>
+                       <i class="fa-solid fa-circle"></i>
+
+              <a class="footer-link row-anchors" href="{{ url_for('contact') }}">Contact</a>
+        </div>
+    </div>
+
+    <p></p>
+    <div class="name" href="/">G/N <br/>
+        <span class="year">{{ year }}</span></div>
+    </div>
+    <div class="linkedin">
+          <a class="footer-link linkedin" target="_blank"  href="https://www.linkedin.com/in/garo-nazarian/">LinkedIn</a>
+    </div>
+
 
 </section>
