@@ -1,6 +1,8 @@
 {% include 'header.html' %}
 <body>
 {% include 'javascript_imports.html' %}
+<script src="{{ url_for('static', filename='landing-page-animation.js') }}"></script>
+
 <link rel="stylesheet" href="{{ url_for('static', filename='nighttime.css') }}"/>
 <script src="{{ url_for('static', filename='nightmode.js') }}"></script>
 
@@ -10,17 +12,28 @@
     {% include 'navbar.html' %}
     <!-- Title -->
       <div class="title-body">
-          <div class="name">
+          <div class="name ">
+              <span class="animate-name"></span>
               <div class="first-name">GARO</div>
               <div class="last-name">NAZARIAN</div>
           </div>
       </div>
-        <div class="sliding-cta">EXPERIENCED SOFTWARE AND DESIGN ENGINEER. EXPLORE MY RECENT WORK. </div>
+        <div class="wrapper">
+              <div class="marquee sliding-cta">
+                    <p>
+                        PROFESSIONAL SOFTWARE ENGINEER. EXPLORE MY ABOUT PAGE FOR MY WORKS. SCROLL FOR RECENT WORKS. CONTACT ME. LET'S COLLABORATE.
+                    </p>
+<!--                    <p>-->
+<!--                        PROFESSIONAL SOFTWARE ENGINEER. EXPLORE MY ABOUT PAGE FOR MY WORKS. SCROLL FOR RECENT WORKS. CONTACT ME. LET'S COLLABORATE.-->
+<!--                    </p>-->
+              </div>
+    </div>
+
     </div>
 <!--TODO: Clean up the Next Previous buttons and optimize for mobile!-->
 </section>
 <section id="body-section">
-    <h2 class="ICode">I Code Everyday</h2>
+    <h1 class="ICode typed-out" >I Code Everyday</h1>
     <h3>Most recent Projects 👨‍💻</h3>
     {% include 'recent_projects.html' %}
 </section>

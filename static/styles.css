@@ -77,7 +77,7 @@ h2, h3{
     padding-left: 5%;
 }
 .container-fluid{
-    padding: 1% 0.5rem 0
+    padding: 1% 0.5rem 0;
 }
 
 
@@ -87,16 +87,13 @@ h2, h3{
 }
 .title-body{
     height: 70vh;
-
-}
-
-.sliding-cta{
-    color: whitesmoke;
-    font-family: 'Merienda', cursive;
-    font-size: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
-    padding-bottom: 1rem ;
+
 }
+
  .name{
     text-align: center;
     color: whitesmoke;
@@ -148,7 +145,7 @@ h2, h3{
     text-align: center;
 }
 .linkedin{
-    padding-top:1rem;
+    padding-top: 1rem;
 }
 
 .row{
@@ -195,8 +192,29 @@ h2, h3{
 }
 #blog-title, .ICode{
     font-weight: bolder;
-    text-decoration: underline;
+}
+/*ICODE Animation*/
+.typewriter {
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: .15em solid orange; /* The typwriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: .15em; /* Adjust as needed */
+  animation:
+    typing 3.5s steps(10, end),
+    blink-caret 1s step-end infinite;
+}
 
+/* The typing effect */
+@keyframes typing {
+  0% { width: 0 }
+  100% { width: 100% }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: orange; }
 }
 
 a{
@@ -405,5 +423,100 @@ input:checked + .slider:before {
 
 
 
+.sliding-cta{
+    color: whitesmoke;
+    font-family: 'Merienda', cursive;
+    font-size: 1rem;
+    padding-bottom: 1rem ;
+}
+
+/*SCROLLING ANIMATION*/
+.bar {
+  position: absolute;
+  text-align: center;
+  border: 5px solid black;
+  justify-content: center;
+    overflow: hidden;
+  padding: 25px 0;
+
+  background-color: #e74c3c;
+  color: white;
+
+  font-size: 18px;
+
+   position: absolute;
+    top: 50%;
+    left: 30%;
+    width: 600px;
+    height: 100px;
+}
+
+.bar_content {
+  display: block; /* Important to give the content a width */
+
+  width: 100%;
+  transform: translateX(0%); /* Animation start out of the screen */
+
+  /* Add the animation */
+  animation: move 5s linear infinite /* infinite make reapeat the animation indefinitely */;
+}
+
+.wrapper {
+    height: 40px;
+    width: 50%;
+    position: absolute;
+    align-items: center;
+    overflow: hidden;
+    left: 25%;
+    bottom: 20%;
+}
+
+.marquee {
+  white-space: nowrap;
+  animation: marquee 10s linear infinite;
+  display: flex;
+  align-items: center;
+
+}
+
+.marquee p {
+  align-items: center;
+  justify-content: center;
+  height: 80%;
+  width: 20%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  flex-shrink: 0;
+  font-size: 21px;
+  cursor: pointer;
 
 
+}
+
+@keyframes marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-70%, 0, 0);
+  }
+}}
+
+/*typewriter js animation*/
+.typed-out{
+  overflow: hidden;
+  border-right: .15em solid orange;
+  white-space: nowrap;
+  animation: typing-code 1s steps(20, end) forwards, blinking-code .8s infinite;
+  font-size: 1.6rem;
+  width: 0;
+}
+@keyframes typing-code {
+  from { width: 0 }
+  to { width: 100% }
+}
+@keyframes blinking-code {
+  from { border-color: transparent }
+  to { border-color: orange; }
+}
