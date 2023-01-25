@@ -34,6 +34,8 @@ body {
 /*TITLE SECTION*/
 #titleStyle{
     background-color: #2C3333;
+    position: relative;
+    z-index: -1;
 }
 
 .control-button, .carousel-control-next-icon, .carousel-control-prev-icon{
@@ -86,7 +88,7 @@ h2, h3{
 
 }
 .title-body{
-    height: 70vh;
+    height: 90vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -94,21 +96,50 @@ h2, h3{
 
 }
 
+
  .name{
     text-align: center;
     color: whitesmoke;
     font-family: 'Merienda', cursive;
     font-weight: 300;
     font-size: 20px;
+    position: relative;
+     z-index: 1;
  }
  .last-name{
     font-size: 4.5rem;
+       position: relative;
+  z-index: 0;
 }
+ .first-name {
+      position: relative;
+  z-index: 0;
+ }
 .namesubtitle{
     font-weight: 300;
     font-size: 13px;
 }
 
+.animate-name {
+    background-image:url('./../static/images/me.jpeg');
+    position: absolute;
+    z-index: 0;
+    width:600px;
+    height:600px;
+    left: 0;
+    transform: scale(0.45);
+    transition: transform 2s;
+    top: -300px;
+    object-fit: cover;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: all 2.5s;
+
+}
+
+.show-image {
+    opacity: 1;
+}
 
 .navbar{
     background-color: #2C3333;
@@ -468,7 +499,7 @@ input:checked + .slider:before {
     align-items: center;
     overflow: hidden;
     left: 25%;
-    bottom: 20%;
+    bottom: 2%;
 }
 
 .marquee {
@@ -488,7 +519,7 @@ input:checked + .slider:before {
   padding: 0;
   position: relative;
   flex-shrink: 0;
-  font-size: 21px;
+  font-size: 15px;
   cursor: pointer;
 
 
@@ -520,3 +551,44 @@ input:checked + .slider:before {
   from { border-color: transparent }
   to { border-color: orange; }
 }
+
+
+
+img-reveal-animation{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    transform-origin: left;
+}
+
+
+
+.text-reveal {
+    animation: fadein 8s;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
