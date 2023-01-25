@@ -34,8 +34,6 @@ body {
 /*TITLE SECTION*/
 #titleStyle{
     background-color: #2C3333;
-    position: relative;
-    z-index: -1;
 }
 
 .control-button, .carousel-control-next-icon, .carousel-control-prev-icon{
@@ -84,11 +82,11 @@ h2, h3{
 
 
 @media (min-width: 1028px) {
-    .container-fluid{ padding: 1% 15% 12% }
+    .container-fluid{ padding: 1% 1% 1% }
 
 }
 .title-body{
-    height: 90vh;
+    height: 78vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -102,16 +100,18 @@ h2, h3{
     color: whitesmoke;
     font-family: 'Merienda', cursive;
     font-weight: 300;
-    font-size: 20px;
+    font-size: 40px;
     position: relative;
-     z-index: 1;
+     z-index: 2;
  }
  .last-name{
-    font-size: 4.5rem;
+    font-size: 8.5rem;
        position: relative;
   z-index: 0;
 }
  .first-name {
+         font-size: 4.5rem;
+
       position: relative;
   z-index: 0;
  }
@@ -123,13 +123,12 @@ h2, h3{
 .animate-name {
     background-image:url('./../static/images/me.jpeg');
     position: absolute;
-    z-index: 0;
+    z-index: -2;
     width:600px;
     height:600px;
-    left: 0;
     transform: scale(0.45);
     transition: transform 2s;
-    top: -300px;
+    top: -280px;
     object-fit: cover;
     opacity: 0;
     transform: translateY(100%);
@@ -574,9 +573,33 @@ img-reveal-animation{
 
 
 
+.typewriter-code {
 
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typewriter-code 2s steps(15, end);
+        box-sizing: border-box;
+    width: 500px;
+text-align: center;
+    margin: auto;
+}
 
+#pulse-button{
+    bottom: 20%;
+    position: relative;
+     z-index: 2;
 
+}
+
+@keyframes blink {
+  from, to { border-color: transparent }
+  50% { border-color: orange; }
+}
+
+@keyframes typewriter-code {
+    from {width: 0;}
+    to {width: 100%;}
+}
 
 
 

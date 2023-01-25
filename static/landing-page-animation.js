@@ -12,7 +12,31 @@ function animateElements() {
 
 $(document).ready(function() {
     $(".animate-name").addClass("show-image");
-     $(".animate-name").css({transform: 'scale(0.33) rotate(5deg)'});
+     $(".animate-name").css({transform: 'scale(0.5) rotate(5deg)'});
 });
+
+const text = document.querySelector(".typewriter-code");
+const letters = text.innerHTML.split("");
+text.innerHTML = "";
+
+TweenMax.to(text, letters.length * 0.1, {
+  text: letters.join(""),
+  ease: Linear.easeNone,
+  onComplete: function() {
+    text.style.width = "auto";
+  }
+});
+
+
+var button = document.getElementById('pulse-button');
+
+anime({
+  targets: button,
+  scale: [1, 1.2],
+  loop: true,
+  duration: 500,
+  easing: 'linear'
+});
+
 
 
