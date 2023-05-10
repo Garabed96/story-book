@@ -28,15 +28,7 @@ TweenMax.to(text, letters.length * 0.1, {
 });
 
 
-var button = document.getElementById('pulse-button');
 
-anime({
-  targets: button,
-  scale: [1, 1.2],
-  loop: true,
-  duration: 500,
-  easing: 'linear'
-});
 
 
 

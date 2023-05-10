@@ -122,6 +122,7 @@ h2, h3{
 
 .animate-name {
     background-image:url('./../static/images/me.jpeg');
+    filter: grayscale(100%);
     position: absolute;
     z-index: -2;
     width:600px;
@@ -498,7 +499,7 @@ input:checked + .slider:before {
     align-items: center;
     overflow: hidden;
     left: 25%;
-    bottom: 2%;
+    bottom: 15%;
 }
 
 .marquee {
@@ -510,6 +511,7 @@ input:checked + .slider:before {
 }
 
 .marquee p {
+    color: orange;
   align-items: center;
   justify-content: center;
   height: 80%;
@@ -520,7 +522,6 @@ input:checked + .slider:before {
   flex-shrink: 0;
   font-size: 15px;
   cursor: pointer;
-
 
 }
 
@@ -585,8 +586,6 @@ text-align: center;
 }
 
 #pulse-button{
-    bottom: 20%;
-    position: relative;
      z-index: 2;
 
 }
